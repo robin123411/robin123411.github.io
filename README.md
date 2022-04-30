@@ -4,32 +4,50 @@ I will share what I have learned about Java.
 
 ### HIT
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+JavaEE 是 Java Web 开发当中事实上的标准，诸多框架也都是建立在 JavaEE 的 API 基础之上的。为了从头理解 Java Web 开发，我们将从一个最简单的 JavaEE Servlet 应用开始，一步一步进入 Java Web 开发的世界。
 
-```markdown
-Syntax highlighted code block
+### 准备工作
+要完成这个教程，你只需要有网络就可以了，首先下载 IntelliJ IDEA Community 版。没错，我们就是故意要使用 Community 版，尽管 Utimate 版对 JavaEE 开发的支持更好，但是更好的工具却可能让我们忽略底层的细节。Community 版对于入门来说已经足够。
 
-# Header 1
-## Header 2
-### Header 3
+然后你需要下载 JavaSE 的 JDK，也就是大家使用最多的 JDK 版本。示例使用的 1.8.0 版本。
 
-- Bulleted
-- List
+最后你需要一个 Servlet Container，去 Tomcat 网站下载一个版本，主要要和 JDK 的版本要求相匹配。示例使用的是 Tomcat 8.5.0。
 
-1. Numbered
-2. List
+### 第一个 Servlet
+首先创建一个工程，选择好 JDK 版本，一路 Next 就可以了。创建好工程之后，我们创建一个新的 Servlet。首先在左边的 src 上右键创建一个 package，然后在 package 上右键，创建一个 
 
-**Bold** and _Italic_ and `Code` text
+Java Class：
 
-[Link](url) and ![Image](src)
-```
+package com.skyline;
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+import javax.servlet.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-### Jekyll Themes
+public class MyFirstServlet implements Servlet {
+    public void init(ServletConfig config) throws ServletException {
+        System.out.println("Init");
+    }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/robin123411/robin123411.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    public void service(ServletRequest request, ServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("From service");
+        PrintWriter out = response.getWriter();
+        out.println("Hello, Java Web.");
+    }
 
-### Support or Contact
+    public void destroy() {
+        System.out.println("Destroy");
+    }
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+    public String getServletInfo() {
+        return null;
+    }
+
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+}
+这时候代码上会报很多错误，核心原因是 javax.servlet 这个包找不到。前面提的过 Servlet API 是包含在 JavaEE 当中的。为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。
+
+在 IDEA 中打开 Library Settings（External Libraries 下面的任意一项右键 -> Open Library Settings
