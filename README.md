@@ -50,4 +50,4 @@ public class MyFirstServlet implements Servlet {
 }
 这时候代码上会报很多错误，核心原因是 javax.servlet 这个包找不到。前面提的过 Servlet API 是包含在 JavaEE 当中的。为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。
 
-在 IDEA 中打开 Library Settings（External Libraries 下面的任意一项右键 -> Open Library Settings
+在 IDEA 中打开 Library Settings（External Libraries 下面的任意一项右键 -> Open Library Settings.
