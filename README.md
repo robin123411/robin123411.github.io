@@ -19,38 +19,38 @@ JavaEE 是 Java Web 开发当中事实上的标准，诸多框架也都是建立
 ### 第一个 Servlet
 首先创建一个工程，选择好 JDK 版本，一路 Next 就可以了。创建好工程之后，我们创建一个新的 Servlet。首先在左边的 src 上右键创建一个 package，然后在 package 上右键，创建一个 
 
-Java Class：
+    Java Class：
 
-package com.skyline;
+    package com.skyline;
 
-import javax.servlet.*;
-import java.io.IOException;
-import java.io.PrintWriter;
+    import javax.servlet.*;
+    import java.io.IOException;
+    import java.io.PrintWriter;
 
-public class MyFirstServlet implements Servlet {
-    public void init(ServletConfig config) throws ServletException {
-        System.out.println("Init");
+        public class MyFirstServlet implements Servlet {
+            public void init(ServletConfig config) throws ServletException {
+                System.out.println("Init");
+            }
+
+        public void service(ServletRequest request, ServletResponse response)
+                throws ServletException, IOException {
+            System.out.println("From service");
+            PrintWriter out = response.getWriter();
+            out.println("Hello, Java Web.");
+        }
+
+        public void destroy() {
+            System.out.println("Destroy");
+        }
+
+        public String getServletInfo() {
+            return null;
+        }
+
+        public ServletConfig getServletConfig() {
+            return null;
+        }
     }
-
-    public void service(ServletRequest request, ServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("From service");
-        PrintWriter out = response.getWriter();
-        out.println("Hello, Java Web.");
-    }
-
-    public void destroy() {
-        System.out.println("Destroy");
-    }
-
-    public String getServletInfo() {
-        return null;
-    }
-
-    public ServletConfig getServletConfig() {
-        return null;
-    }
-}
 这时候代码上会报很多错误，核心原因是 javax.servlet 这个包找不到。前面提的过 Servlet API 是包含在 JavaEE 当中的。为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。
 
 在 IDEA 中打开 Library Settings（External Libraries 下面的任意一项右键 -> Open Library Settings.
