@@ -2,7 +2,7 @@
 
 I will share what I have learned about Java.  
 
-### HIT
+### HIT JAVA
 
 JavaEE 是 Java Web 开发当中事实上的标准，诸多框架也都是建立在 JavaEE 的 API 基础之上的。为了从头理解 Java Web 开发，我们将从一个最简单的 JavaEE Servlet 应用开始，一步一步进入 Java Web 开发的世界。
 
